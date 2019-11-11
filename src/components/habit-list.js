@@ -6,9 +6,11 @@ const HabitList = ({ habits }) => {
   return (
     <section className="inline-block mt-6">
       <h2 className="font-black text-3xl">My Habits</h2>
-      {habits.map(habit => (
-        <Habit habit={habit} key={habit} />
-      ))}
+      <div className="flex flex-wrap -mx-4">
+        {habits.map(habit => (
+          <Habit habit={habit} key={habit} />
+        ))}
+      </div>
     </section>
   );
 };

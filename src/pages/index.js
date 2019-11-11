@@ -19,7 +19,7 @@ const Home = () => {
   if (loading) return <div>Loading...</div>;
   return (
     <Layout>
-      <div className="mt-12">
+      <div className="mt-12 px-4 relative">
         <HabitForm setHabits={setHabits} />
         <HabitList habits={habits} />
       </div>
