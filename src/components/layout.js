@@ -3,10 +3,11 @@ import Head from 'next/head';
 
 import Nav from './nav';
 import '../css/tailwind.css';
+import '../lib/mongoose';
 
 const Layout = ({ children }) => {
   return (
-    <div>
+    <div className="bg-blue-900 min-h-screen">
       <Head>
         <title>Home</title>
         <link rel="icon" href="/favicon.ico" />
@@ -18,7 +19,7 @@ const Layout = ({ children }) => {
 };
 
 Layout.propTypes = {
-  children: PropTypes.object,
+  children: PropTypes.array,
 };
 
 export default Layout;

@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import useForm from 'react-hook-form';
+import { FiAlertTriangle } from 'react-icons/fi';
 
 const HabitForm = ({ setHabits }) => {
   const { register, handleSubmit, errors, reset } = useForm();
@@ -10,10 +11,11 @@ const HabitForm = ({ setHabits }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)} className="flex justify-center">
       {errors.habit && (
-        <p className="absolute font-black text-yellow-800 px-4 top-0 -mt-8">
-          Please add a new habit
+        <p className="absolute flex font-black items-center text-pink-400 px-4 top-0 -mt-8">
+          <FiAlertTriangle className="text-pink-300" />{' '}
+          <span className="ml-1">Please add a new habit</span>
         </p>
       )}
       <input
@@ -21,11 +23,11 @@ const HabitForm = ({ setHabits }) => {
         placeholder="Habit"
         name="habit"
         ref={register({ required: true, maxLength: 80 })}
-        className="border-2 border-yellow-600 px-4 py-1"
+        className="bg-blue-800 border-2 border-pink-400 font-black px-4 py-1 rounded text-pink-400 placeholder-pink-400 shadow hover:shadow-lg"
       />
       <button
         type="submit"
-        className="bg-yellow-400 font-black ml-4 px-4 py-1 rounded shadow text-yellow-800"
+        className="bg-pink-400 font-black ml-4 px-4 py-1 rounded shadow text-pink-800 hover:bg-pink-500 hover:shadow-lg hover:text-pink-900"
       >
         Submit
       </button>

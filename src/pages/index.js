@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import { useState } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
@@ -19,6 +20,9 @@ const Home = () => {
   if (loading) return <div>Loading...</div>;
   return (
     <Layout>
+      <Head>
+        <title>Level Up Your Life</title>
+      </Head>
       <div className="mt-12 px-4 relative">
         <HabitForm setHabits={setHabits} />
         <HabitList habits={habits} />
