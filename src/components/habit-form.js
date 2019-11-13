@@ -1,12 +1,29 @@
-import PropTypes from 'prop-types';
+import { useMutation } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
 import useForm from 'react-hook-form';
 import { FiAlertTriangle } from 'react-icons/fi';
 
-const HabitForm = ({ setHabits }) => {
+const HabitForm = () => {
   const { register, handleSubmit, errors, reset } = useForm();
 
+  const [addHabit] = useMutation(gql`
+    mutation addHabit($habit: HabitInput) {
+      addHabit(habit: $habit) {
+        _id
+        name
+      }
+    }
+  `);
+
   const onSubmit = data => {
-    setHabits(prevState => [...prevState, data.habit]);
+    addHabit({
+      variables: {
+        habit: {
+          name: data.habit,
+        },
+      },
+    });
+    console.log(data.habit);
     reset();
   };
 
@@ -33,10 +50,6 @@ const HabitForm = ({ setHabits }) => {
       </button>
     </form>
   );
-};
-
-HabitForm.propTypes = {
-  setHabits: PropTypes.func,
 };
 
 export default HabitForm;

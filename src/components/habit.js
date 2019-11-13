@@ -18,7 +18,7 @@ const Habit = ({ habit }) => {
 };
 
 Habit.propTypes = {
-  habit: PropTypes.string,
+  habit: PropTypes.object,
 };
 
 export default Habit;

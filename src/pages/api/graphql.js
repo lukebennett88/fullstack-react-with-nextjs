@@ -2,11 +2,11 @@ import { ApolloServer } from 'apollo-server-micro';
 import { mergeResolvers, mergeTypeDefs } from 'graphql-toolkit';
 
 import connectDb from '../../lib/mongoose';
-import { habitResolvers } from '../../api/habits/resolvers';
-import { habitMutations } from '../../api/habits/mutations';
+import { habitsResolvers } from '../../api/habits/resolvers';
+import { habitsMutations } from '../../api/habits/mutations';
 import Habits from '../../api/habits/habits.graphql';
 
-const resolvers = mergeResolvers([habitResolvers, habitMutations]);
+const resolvers = mergeResolvers([habitsResolvers, habitsMutations]);
 
 const typeDefs = mergeTypeDefs([Habits]);
 
