@@ -4,8 +4,6 @@ import { ApolloProvider } from '@apollo/react-hooks';
 import fetch from 'isomorphic-unfetch';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 
-import PropTypes from 'prop-types';
-
 export function withApollo(PageComponent) {
   const WithApollo = ({ apolloClient, apolloState, ...pageProps }) => {
     const client = apolloClient || initApolloClient(apolloState);
@@ -17,23 +15,18 @@ export function withApollo(PageComponent) {
     );
   };
 
-  WithApollo.propTypes = {
-    apolloClient: PropTypes.object,
-    apolloState: PropTypes.object,
-  };
-
-  WithApollo.getInitialProps = async context => {
-    const { AppTree } = context;
-    const apolloClient = (context.apolloClient = initApolloClient());
+  WithApollo.getInitialProps = async ctx => {
+    const { AppTree } = ctx;
+    const apolloClient = (ctx.apollClient = initApolloClient());
 
     let pageProps = {};
     if (PageComponent.getInitialProps) {
-      pageProps = await PageComponent.getInitialProps(context);
+      pageProps = await PageComponent.getInitialProps(ctx);
     }
 
     // If on server
     if (typeof window === 'undefined') {
-      if (context.res && context.res.finished) {
+      if (ctx.res && ctx.res.finished) {
         return pageProps;
       }
 
@@ -65,6 +58,7 @@ export function withApollo(PageComponent) {
 }
 
 const initApolloClient = (initialState = {}) => {
+  // const ssrMode = typeof window === 'undefined';
   const cache = new InMemoryCache().restore(initialState);
 
   const client = new ApolloClient({
