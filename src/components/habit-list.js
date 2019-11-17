@@ -4,16 +4,21 @@ import gql from 'graphql-tag';
 import Habit from './habit';
 
 const HabitList = () => {
-  const { data, loading } = useQuery(gql`
+  const { data, loading, error } = useQuery(gql`
     query getHabits {
       habits {
         _id
         name
+        events {
+          _id
+          date
+        }
       }
     }
   `);
 
   if (loading) return <section>Loading...</section>;
+  if (error) return <section>Error: {error}</section>;
   const { habits } = data;
   return (
     <section className="inline-block mt-6">

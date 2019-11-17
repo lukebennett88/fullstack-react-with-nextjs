@@ -1,3 +1,6 @@
+import { GraphQLScalarType } from 'graphql';
+import { Kind } from 'graphql/language';
+
 import Habits from './habits';
 
 export const habitsResolvers = {
@@ -11,4 +14,20 @@ export const habitsResolvers = {
       }
     },
   },
+  Date: new GraphQLScalarType({
+    name: 'Date',
+    description: 'Custom Date scalar',
+    parseValue(value) {
+      return new Date(value); // value returned from the client
+    },
+    serialize(value) {
+      return value.getTime(); // value sent to the client
+    },
+    parseLiteral(ast) {
+      if (ast.kind === Kind.INT) {
+        return new Date(ast.value);
+      }
+      return null;
+    },
+  }),
 };

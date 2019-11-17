@@ -10,7 +10,12 @@ const Habit = ({ habit }) => {
       <h3 className="font-black text-2xl">{habit.name}</h3>
       <div className="flex -mx-2">
         {dates.reverse().map(date => (
-          <HabitButton date={date} key={date.getTime()} />
+          <HabitButton
+            date={date}
+            habitId={habit._id}
+            events={habit.events}
+            key={date.getTime()}
+          />
         ))}
       </div>
     </article>
