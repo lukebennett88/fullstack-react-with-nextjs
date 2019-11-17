@@ -1,13 +1,14 @@
+import Habits from './habits';
+
 export const habitsResolvers = {
   Query: {
     async habits() {
-      console.log('Query habit');
-      return [
-        {
-          _id: 'Array goes here',
-          name: 'Name of habit goes here',
-        },
-      ];
+      try {
+        const habits = await Habits.find();
+        return habits;
+      } catch (e) {
+        console.log(e);
+      }
     },
   },
 };

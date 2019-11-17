@@ -6,14 +6,19 @@ import { FiAlertTriangle } from 'react-icons/fi';
 const HabitForm = () => {
   const { register, handleSubmit, errors, reset } = useForm();
 
-  const [addHabit] = useMutation(gql`
-    mutation addHabit($habit: HabitInput) {
-      addHabit(habit: $habit) {
-        _id
-        name
+  const [addHabit] = useMutation(
+    gql`
+      mutation addHabit($habit: HabitInput) {
+        addHabit(habit: $habit) {
+          _id
+          name
+        }
       }
+    `,
+    {
+      refetchQueries: ['getHabits'],
     }
-  `);
+  );
 
   const onSubmit = data => {
     addHabit({
