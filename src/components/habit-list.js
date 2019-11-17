@@ -5,7 +5,7 @@ import Habit from './habit';
 
 const HabitList = () => {
   const { data, loading } = useQuery(gql`
-    {
+    query getHabits {
       habits {
         _id
         name
