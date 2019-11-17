@@ -57,12 +57,14 @@ export function withApollo(PageComponent) {
   return WithApollo;
 }
 
+const isDev = process.env.NODE_ENV !== 'production';
+const url = isDev ? 'http://localhost:3000' : 'https://habits-app.now.sh';
+
 const initApolloClient = (initialState = {}) => {
-  // const ssrMode = typeof window === 'undefined';
   const cache = new InMemoryCache().restore(initialState);
 
   const client = new ApolloClient({
-    uri: 'http://localhost:3000/api/graphql',
+    uri: `${url}/api/graphql`,
     fetch,
     cache,
   });

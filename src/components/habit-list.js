@@ -18,7 +18,10 @@ const HabitList = () => {
   `);
 
   if (loading) return <section>Loading...</section>;
-  if (error) return <section>Error: {error}</section>;
+  if (error) {
+    console.log(error);
+    return null;
+  }
   const { habits } = data;
   return (
     <section className="inline-block mt-6">

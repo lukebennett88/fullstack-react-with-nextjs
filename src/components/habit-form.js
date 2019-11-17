@@ -28,7 +28,6 @@ const HabitForm = () => {
         },
       },
     });
-    console.log(data.habit);
     reset();
   };
 
